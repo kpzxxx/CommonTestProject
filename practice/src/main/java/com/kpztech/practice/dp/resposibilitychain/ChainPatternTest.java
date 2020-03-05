@@ -3,7 +3,7 @@ package com.kpztech.practice.dp.resposibilitychain;
 /**
  * 责任链模式
  */
-public class ChainPatternDemo {
+public class ChainPatternTest {
 
   private static AbstractLogger getChainOfLoggers(){
 
