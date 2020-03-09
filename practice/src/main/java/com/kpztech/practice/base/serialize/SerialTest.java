@@ -1,25 +1,47 @@
 package com.kpztech.practice.base.serialize;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Objects;
 
 /**
- * 序列化
+ * 序列化和反序列化
  */
 public class SerialTest{
+  private static final String PATH = "/tmp/person.txt";
 
   public static void main(String[] args) {
     serial();
     deserial();
+
   }
 
-  public static void serial() {
+  // 当前类的绝对路径
+  private String getPath(){
+    return Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath();
+  }
+
+  private static void serial() {
     SonPerson serialPerson = new SonPerson(1L, "A", 32, "India");
     System.out.println("Initiate person: " + serialPerson);
-    try (FileOutputStream fos = new FileOutputStream("person.txt"); ObjectOutputStream oos = new ObjectOutputStream(
+
+    File file = new File(PATH);
+    if(!file.exists()){
+      try {
+        boolean result = file.createNewFile();
+        if(result){
+          System.out.println("Create file: " + file.getName());
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+
+    try (FileOutputStream fos = new FileOutputStream(PATH); ObjectOutputStream oos = new ObjectOutputStream(
         fos)) {
       oos.writeObject(serialPerson);
       oos.flush();
@@ -29,9 +51,10 @@ public class SerialTest{
     }
   }
 
-  public static void deserial() {
+  private static void deserial() {
     SonPerson serialPerson;
-    try (FileInputStream fis = new FileInputStream("person.txt"); ObjectInputStream ois = new ObjectInputStream(fis)) {
+    try (FileInputStream fis = new FileInputStream(PATH); ObjectInputStream ois =
+        new ObjectInputStream(fis)) {
       serialPerson = (SonPerson)ois.readObject();
       System.out.println("Got person: " + serialPerson);
 
