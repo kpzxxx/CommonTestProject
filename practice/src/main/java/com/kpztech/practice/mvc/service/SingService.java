@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Nullable;
 import javax.annotation.Resource;
 
 @Service
@@ -24,7 +25,7 @@ public class SingService implements ApplicationContextAware {
   }
 
   @Override
-  public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+  public void setApplicationContext(@Nullable ApplicationContext applicationContext) throws BeansException {
     this.applicationContext = applicationContext;
   }
 
