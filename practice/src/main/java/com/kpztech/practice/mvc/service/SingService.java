@@ -4,21 +4,23 @@ import com.kpztech.practice.base.spring.OperaSinger;
 import com.kpztech.practice.base.spring.Singer;
 
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 @Service
 public class SingService implements ApplicationContextAware {
-  @Autowired
-  private Singer singer;
+
+  @Resource
+  private Singer operaSinger;
 
   private ApplicationContext applicationContext;
 
 
-  public String sing(){
-    return singer.sing();
+  public String sing() {
+    return operaSinger.sing();
   }
 
   @Override
@@ -26,7 +28,7 @@ public class SingService implements ApplicationContextAware {
     this.applicationContext = applicationContext;
   }
 
-  public String getBean(){
+  public String getBean() {
     return applicationContext.getBean(OperaSinger.class).getClass().getName();
   }
 }
