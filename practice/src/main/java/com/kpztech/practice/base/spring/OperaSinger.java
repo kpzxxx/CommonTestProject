@@ -4,20 +4,17 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
 @Component
 @Primary
 @Lazy
 public class OperaSinger implements Singer {
 
-  @PostConstruct
+//  @PostConstruct
   public void init(){
     System.out.println("Me, Opera Singer is running now!");
   }
 
-  @PreDestroy
+//  @PreDestroy
   public void destroy(){
     System.out.println("Oh no, Opera Singer is dead.");
   }
