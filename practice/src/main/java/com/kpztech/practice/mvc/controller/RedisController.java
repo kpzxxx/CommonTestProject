@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/redis")
+@Slf4j
 public class RedisController {
 
   @Autowired
@@ -35,19 +38,19 @@ public class RedisController {
   @RequestMapping(path = "/lock")
   public String lock() {
     String key = "stock";
-    System.out.println("[" + Thread.currentThread().getName() + "]Try to lock.");
+    log.info("[" + Thread.currentThread().getName() + "]Try to lock.");
     try {
       // 重入，锁3次
       for (int i = 0; i < 3; i++) {
         Thread.sleep(1000);
         redissonUtil.lock(key);
-        System.out.println("[" + Thread.currentThread().getName() + "] lock status: " + redissonUtil.getLockStatus(key));
+        log.info("[" + Thread.currentThread().getName() + "] lock status: " + redissonUtil.getLockStatus(key));
       }
       // 3次解锁
       for (int i = 0; i < 3; i++) {
         Thread.sleep(1000);
         redissonUtil.unlock(key);
-        System.out.println("[" + Thread.currentThread().getName() + "] lock status: " + redissonUtil.getLockStatus(key));
+        log.info("[" + Thread.currentThread().getName() + "] lock status: " + redissonUtil.getLockStatus(key));
       }
 
     } catch (InterruptedException e) {
