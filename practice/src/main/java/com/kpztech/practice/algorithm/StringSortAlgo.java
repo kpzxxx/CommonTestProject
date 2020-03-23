@@ -1,5 +1,7 @@
 package com.kpztech.practice.algorithm;
 
+import com.kpztech.practice.test.string.StringTest;
+
 import java.util.Arrays;
 
 /**
@@ -7,10 +9,8 @@ import java.util.Arrays;
  */
 public class StringSortAlgo {
 
-    // TODO 如何产生一个随机字符串？ 输入为长度length
-
     public static void main(String[] args) {
-        String s = "az12sx";
+        String s = StringTest.randomStr(10);
         System.out.println(sort(s));
     }
 

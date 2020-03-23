@@ -1,5 +1,8 @@
 package com.kpztech.practice.dp.decorator;
 
+/**
+ * 装饰器模式
+ */
 public class DecoratorPatternDemo {
 
   public static void main(String[] args) {
