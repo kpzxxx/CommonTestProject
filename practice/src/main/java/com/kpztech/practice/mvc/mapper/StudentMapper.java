@@ -1,4 +1,4 @@
-package com.kpztech.practice.mvc.dao;
+package com.kpztech.practice.mvc.mapper;
 
 import org.springframework.stereotype.Repository;
 

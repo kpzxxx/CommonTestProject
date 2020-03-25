@@ -1,6 +1,6 @@
 package com.kpztech.practice.mvc.service;
 
-import com.kpztech.practice.mvc.dao.StudentMapper;
+import com.kpztech.practice.mvc.mapper.StudentMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
