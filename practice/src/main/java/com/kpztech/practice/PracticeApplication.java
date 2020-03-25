@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
 @ServletComponentScan("com.kpztech.practice.mvc")
-@MapperScan("com.kpztech.practice.mvc.dao")
+@MapperScan("com.kpztech.practice.mvc.mapper")
 public class PracticeApplication {
 
   public static void main(String[] args) {
