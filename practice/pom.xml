@@ -82,29 +82,30 @@
             <version>3.12.2</version>
         </dependency>
 
-
         <!-- Additional -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.6</version>
         </dependency>
-
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>26.0-jre</version>
         </dependency>
-
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>4.1.45.Final</version>
         </dependency>
-
         <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
             <version>LATEST</version>
         </dependency>
 
