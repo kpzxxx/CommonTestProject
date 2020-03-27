@@ -7,4 +7,5 @@ public class StudentEntity {
   private Long id;
   private String phone;
   private Integer gender;
+  private String name;
 }

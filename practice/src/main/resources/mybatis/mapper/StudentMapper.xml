@@ -7,60 +7,21 @@
         <result column="id" property="id"/>
     </resultMap>
 
-    <sql id="cols_all">
-        id,
-        <include refid="cols_exclude_id"/>
-    </sql>
-
-    <sql id="cols_exclude_id">phone,gender</sql>
-
-    <sql id="vals">
-        #{phone},
-        #{gender}
-    </sql>
-
-    <!--<insert id="create" parameterType="com.youzan.retail.stock.scm.interbusiness.model.ApplyDeliveryRelation"-->
-            <!--keyProperty="id" useGeneratedKeys="true">-->
-        <!--INSERT INTO <include refid="tb" />-->
-        <!--(<include refid="cols_exclude_id" />)-->
-        <!--VALUES-->
-        <!--(<include refid="vals" />)-->
-    <!--</insert>-->
-
-
-    <!--<update id="hiddenToShowByIds" parameterType="java.util.List">-->
-        <!--UPDATE <include refid="tb" />-->
-        <!--SET can_show=1-->
-        <!--WHERE id IN-->
-        <!--<foreach collection="ids" item="id" open="(" separator="," close=")">-->
-            <!--#{id}-->
-        <!--</foreach>-->
-    <!--</update>-->
-
-
-    <!--<insert id="batchCreate">-->
-        <!--INSERT INTO-->
-        <!--<include refid="tb"/>-->
-        <!--(<include refid="cols_exclude_id"/>)-->
-
-        <!--VALUES-->
-        <!--<foreach collection="list" item="item" index="index" separator=",">-->
-            <!--(-->
-            <!--#{item.type},-->
-            <!--#{item.goodsApplyBizNo},-->
-            <!--#{item.deliveryBizNo},-->
-            <!--#{item.groupId},-->
-            <!--#{item.canShow},-->
-            <!--now(),-->
-            <!--now()-->
-            <!--)-->
-        <!--</foreach>-->
-    <!--</insert>-->
-
+    <insert id="insert" parameterType="com.kpztech.practice.mvc.entity.StudentEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into student (phone, gender, name)
+        values (#{phone}, #{gender}, #{name})
+    </insert>
 
 
     <select id="count" resultType="Long">
-        SELECT count(*) FROM ${tb_student}
+        SELECT count(*)
+        FROM student
+    </select>
+
+    <select id="page" resultType="com.kpztech.practice.mvc.entity.StudentEntity">
+        SELECT *
+        FROM student
+        limit #{offset},#{limit}
     </select>
 
 </mapper>
