@@ -34,7 +34,5 @@ public class Test3 {
       list.remove(index);
     }
     return array;
-
-
   }
 }

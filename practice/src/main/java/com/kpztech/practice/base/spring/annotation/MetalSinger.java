@@ -1,4 +1,4 @@
-package com.kpztech.practice.base.spring;
+package com.kpztech.practice.base.spring.annotation;
 
 import org.springframework.stereotype.Component;
 

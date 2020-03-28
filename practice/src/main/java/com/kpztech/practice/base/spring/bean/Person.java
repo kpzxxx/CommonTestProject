@@ -1,4 +1,4 @@
-package com.kpztech.practice.spring;
+package com.kpztech.practice.base.spring.bean;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
@@ -46,12 +46,12 @@ public class Person implements BeanFactoryAware, BeanNameAware, InitializingBean
   }
 
   @Override
-  public void destroy() throws Exception {
+  public void destroy() {
     log.info("【DisposableBean接口】调用DisposableBean.destroy()");
   }
 
   @Override
-  public void afterPropertiesSet() throws Exception {
+  public void afterPropertiesSet() {
     log.info("【InitializingBean接口】调用InitializingBean.afterPropertiesSet()");
   }
 

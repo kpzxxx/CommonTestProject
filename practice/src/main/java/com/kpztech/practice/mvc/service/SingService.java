@@ -1,7 +1,7 @@
 package com.kpztech.practice.mvc.service;
 
-import com.kpztech.practice.base.spring.OperaSinger;
-import com.kpztech.practice.base.spring.Singer;
+import com.kpztech.practice.base.spring.annotation.OperaSinger;
+import com.kpztech.practice.base.spring.annotation.Singer;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

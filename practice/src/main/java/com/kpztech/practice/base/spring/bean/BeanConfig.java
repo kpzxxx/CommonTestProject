@@ -1,4 +1,4 @@
-package com.kpztech.practice.spring;
+package com.kpztech.practice.base.spring.bean;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

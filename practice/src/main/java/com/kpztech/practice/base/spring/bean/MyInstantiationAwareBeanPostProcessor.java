@@ -1,4 +1,4 @@
-package com.kpztech.practice.spring;
+package com.kpztech.practice.base.spring.bean;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
