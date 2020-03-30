@@ -6,6 +6,13 @@
     - tail -f ~/logs/rocketmqlogs/namesrv.log
     - nohup sh bin/mqbroker -n localhost:9876 &
     - tail -f ~/logs/rocketmqlogs/broker.log
+4. **Docker**命令：
+    - **RocketMQ Broker** docker run -d -p 10911:10911 -p 10909:10909 -v `pwd`/data/broker/logs:/root/logs -v `pwd`/data/broker/store:/root/store --name rmq-broker --link rmq-namesrv:namesrv -e "NAMESRV_ADDR=namesrv:9876" -e "MAX_POSSIBLE_HEAP=200000000" rocketmqinc/rocketmq sh mqbroker
+    - **RocketMQ NameServer** docker run -d -p 9876:9876 -v `pwd`/data/namesrv/logs:/root/logs -v `pwd`/data/namesrv/store:/root/store --name rmq-namesrv -e "MAX_POSSIBLE_HEAP=100000000" rocketmqinc/rocketmq sh mqnamesrv
+    - **Nginx** docker run --detach --publish=80:80 --name=webserver nginx
+    - **Mysql** docker run --name mysql -e MYSQL_ROOT_PASSWORD=12345678 -d mysql:latest
+    - **Redis** docker run --name redis -p 6379:6379 -d redis
+    - **Zookeeper** docker run --name zookeeper -p 2181:2181 --restart always -d zookeeper
 
 ## TODO
 1. 找到阴历和阳历日期相同的多少年内的所有天：输入：可以是阳历，也可以是阴历日期、年的区间、日期。
