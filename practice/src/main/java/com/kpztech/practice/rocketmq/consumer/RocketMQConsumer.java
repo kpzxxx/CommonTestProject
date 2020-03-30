@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 @RocketMQMessageListener(topic = "test-topic", consumerGroup = "Test-group")
-public class RocketMQHandler implements RocketMQListener<String> {
+public class RocketMQConsumer implements RocketMQListener<String> {
 
   @Override
   public void onMessage(String s) {

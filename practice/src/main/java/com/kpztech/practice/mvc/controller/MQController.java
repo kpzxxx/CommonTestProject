@@ -1,6 +1,6 @@
 package com.kpztech.practice.mvc.controller;
 
-import com.kpztech.practice.rocketmq.producer.RocketMQSender;
+import com.kpztech.practice.rocketmq.producer.RocketMQProducer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class MQController {
 
   @Autowired
-  private RocketMQSender rocketMQSender;
+  private RocketMQProducer rocketMQProducer;
 
   @RequestMapping("/send")
   public String send(@RequestParam("msg") String msg) {
-    rocketMQSender.send(msg);
+    rocketMQProducer.send(msg);
     return "success";
   }
 }
