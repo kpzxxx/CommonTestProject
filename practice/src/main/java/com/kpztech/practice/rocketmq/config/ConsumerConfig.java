@@ -1,13 +1,10 @@
 package com.kpztech.practice.rocketmq.config;
 
-import com.kpztech.practice.rocketmq.consumer.RocketMQHandler;
-
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
 public class ConsumerConfig {
 
   @Bean
@@ -17,7 +14,7 @@ public class ConsumerConfig {
     consumer.setInstanceName("practice-consumer");
     consumer.subscribe("test-topic", "some-tag");
 
-    consumer.registerMessageListener(new RocketMQHandler());
+//    consumer.registerMessageListener(new RocketMQHandler());
 
     consumer.start();
     return consumer;
