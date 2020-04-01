@@ -1,9 +1,9 @@
 package com.kpztech.practice.mvc.common;
 
 public enum ResponseEnum {
-  SUCCESS(0,"成功"),
-  STUDENT_NO_PIC(1001, "无图片可加载。")
-
+  SUCCESS(0, "成功"),
+  STUDENT_NO_PIC(1001, "无图片可加载。"),
+  STUDENT_IMG_UPLOAD_ERROR(1002, "上传文件失败。"),
 
   ;
   private int code;

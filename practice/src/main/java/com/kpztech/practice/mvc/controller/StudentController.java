@@ -34,26 +34,27 @@ public class StudentController {
   private StudentService studentService;
 
   @GetMapping("/count")
-  public ResponseEntity<Long> count() {
-    return ResponseEntity.ok(studentService.count());
+  public CommonResponse count() {
+    Long count = studentService.count();
+    return CommonResponse.of(count);
   }
 
   @PostMapping("/insert")
-  public ResponseEntity<StudentVO> insert(@RequestBody StudentEntity student) {
+  public ResponseEntity<CommonResponse> insert(@RequestBody StudentEntity student) {
     StudentEntity result = studentService.insert(student);
-    return ResponseEntity.ok(StudentConverter.convert(result));
+    StudentVO studentVO = StudentConverter.convert(result);
+    return ResponseEntity.ok(CommonResponse.of(studentVO));
   }
 
   @PostMapping("/img/{id}")
-  public ResponseEntity<Boolean> uploadImg(@RequestParam MultipartFile pic, @PathVariable Long id) {
-    boolean result = true;
+  public ResponseEntity<CommonResponse> uploadImg(@RequestParam MultipartFile pic, @PathVariable Long id) {
     try {
       studentService.uploadImg(pic, id);
     } catch (IOException e) {
       e.printStackTrace();
-      result = false;
+      return ResponseEntity.ok(CommonResponse.of(ResponseEnum.STUDENT_IMG_UPLOAD_ERROR));
     }
-    return ResponseEntity.ok(result);
+    return ResponseEntity.ok(CommonResponse.of(ResponseEnum.SUCCESS));
   }
 
   @GetMapping("/img/{id}")
@@ -61,29 +62,29 @@ public class StudentController {
     StudentEntity student = studentService.getStudent(id);
 
     if (StringUtils.isBlank(student.getPicName()) || student.getPic() == null || student.getPic().length == 0) {
-      return ResponseEntity.ok(CommonResponse.of(ResponseEnum.SUCCESS));
+      return ResponseEntity.ok(CommonResponse.of(ResponseEnum.STUDENT_NO_PIC));
     }
     String downloadName = student.getName() + FileUtils.getFileSuffix(student.getPicName());
 
     FileUtils.download(response, downloadName, student.getPic());
 
-    return ResponseEntity.ok(CommonResponse.of(ResponseEnum.STUDENT_NO_PIC));
+    return ResponseEntity.ok(CommonResponse.of(ResponseEnum.SUCCESS));
   }
 
   @GetMapping("/page")
-  public ResponseEntity<List<StudentVO>> getPaged(
+  public ResponseEntity<CommonResponse> getPaged(
       @RequestParam(defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "20") Integer pageSize) {
     List<StudentEntity> studentEntities = studentService.pageQuery(pageNo, pageSize);
     List<StudentVO> result = studentEntities.stream().map(StudentConverter::convert).collect(Collectors.toList());
-    return ResponseEntity.ok(result);
+    return ResponseEntity.ok(CommonResponse.of(result));
   }
 
   @GetMapping("/pageWithTest")
-  public ResponseEntity<List<StudentVO>> pageQueryWithTest(
+  public ResponseEntity<CommonResponse> pageQueryWithTest(
       @RequestParam(defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "20") Integer pageSize) {
     List<StudentEntity> studentEntities = studentService.pageQueryWithTest(pageNo, pageSize);
     List<StudentVO> result = studentEntities.stream().map(StudentConverter::convert).collect(Collectors.toList());
-    return ResponseEntity.ok(result);
+    return ResponseEntity.ok(CommonResponse.of(result));
   }
 
 }
