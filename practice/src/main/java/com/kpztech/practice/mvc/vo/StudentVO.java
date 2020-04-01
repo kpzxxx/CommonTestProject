@@ -1,13 +1,11 @@
-package com.kpztech.practice.mvc.entity;
+package com.kpztech.practice.mvc.vo;
 
 import lombok.Data;
 
 @Data
-public class StudentEntity {
+public class StudentVO {
   private Long id;
   private String phone;
   private Integer gender;
   private String name;
-  private byte[] pic;
-  private String picName;
 }

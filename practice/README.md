@@ -14,6 +14,8 @@
     - **Redis** docker run --name redis -p 6379:6379 -d redis
     - **Zookeeper** docker run --name zookeeper -p 2181:2181 --restart always -d zookeeper
     - **RocketMQ Admin** docker run -e "JAVA_OPTS=-Drocketmq.namesrv.addr=172.17.0.6:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false" -p 8080:8080 --name rmq-admin --detach -t styletang/rocketmq-console-ng
+> *注意：broker.conf 文件里需要添加brokerIP1=127.0.0.1*
+
 
 ## TODO
 1. 找到阴历和阳历日期相同的多少年内的所有天：输入：可以是阳历，也可以是阴历日期、年的区间、日期。

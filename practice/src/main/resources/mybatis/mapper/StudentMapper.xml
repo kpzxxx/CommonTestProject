@@ -7,21 +7,53 @@
         <result column="id" property="id"/>
     </resultMap>
 
-    <insert id="insert" parameterType="com.kpztech.practice.mvc.entity.StudentEntity" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.kpztech.practice.mvc.entity.StudentEntity" useGeneratedKeys="true"
+            keyProperty="id">
         insert into student (phone, gender, name)
         values (#{phone}, #{gender}, #{name})
+        on duplicate key update
+            phone  = values(phone),
+            gender = values(gender),
+            name   = values(name)
     </insert>
 
+    <update id="uploadImg">
+        update student
+        set pic      = #{img},
+            pic_name = #{picName}
+        where id = #{id}
+    </update>
 
     <select id="count" resultType="Long">
-        SELECT count(*)
-        FROM student
+        select count(*)
+        from student
     </select>
 
     <select id="page" resultType="com.kpztech.practice.mvc.entity.StudentEntity">
-        SELECT *
-        FROM student
+        select *
+        from student
         limit #{offset},#{limit}
+    </select>
+
+    <select id="pageWithGenders" resultType="com.kpztech.practice.mvc.entity.StudentEntity">
+        select *
+        from student
+        <if test="genders!=null and genders.size()>0">
+            where gender in
+            <foreach collection="genders" item="gender" open="(" close=")" separator=",">
+                #{gender}
+            </foreach>
+        </if>
+
+        limit #{offset},#{limit}
+    </select>
+
+    <select id="getById" resultType="com.kpztech.practice.mvc.entity.StudentEntity">
+        select *
+        from student
+        <where>
+            id = #{id}
+        </where>
     </select>
 
 </mapper>

@@ -12,7 +12,15 @@ public interface StudentMapper {
 
   void insert(StudentEntity studentEntity);
 
+  long uploadImg(@Param("img") byte[] img, @Param("id") Long id, @Param("picName") String picName);
+
   Long count();
 
   List<StudentEntity> page(@Param("offset") Integer offset, @Param("limit") Integer limit);
+
+  List<StudentEntity> pageWithGenders(
+      @Param("offset") Integer offset, @Param("limit") Integer limit, @Param("genders") List<Integer> genders);
+
+  StudentEntity getById(@Param("id") Long id);
+
 }
