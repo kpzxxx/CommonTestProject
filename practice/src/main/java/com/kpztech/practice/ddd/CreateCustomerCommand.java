@@ -8,7 +8,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-class CreateCustomerCommand {
+public class CreateCustomerCommand {
   private String firstName;
   private String lastName;
 

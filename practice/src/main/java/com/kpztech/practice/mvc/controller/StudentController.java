@@ -1,14 +1,18 @@
 package com.kpztech.practice.mvc.controller;
 
+import com.kpztech.practice.mvc.common.CommonResponse;
+import com.kpztech.practice.mvc.common.ResponseEnum;
 import com.kpztech.practice.mvc.converter.StudentConverter;
 import com.kpztech.practice.mvc.entity.StudentEntity;
 import com.kpztech.practice.mvc.service.StudentService;
 import com.kpztech.practice.mvc.vo.StudentVO;
 import com.kpztech.practice.util.FileUtils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,8 +44,8 @@ public class StudentController {
     return ResponseEntity.ok(StudentConverter.convert(result));
   }
 
-  @PostMapping("/img")
-  public ResponseEntity<Boolean> uploadImg(@RequestParam MultipartFile pic, @RequestParam Long id) {
+  @PostMapping("/img/{id}")
+  public ResponseEntity<Boolean> uploadImg(@RequestParam MultipartFile pic, @PathVariable Long id) {
     boolean result = true;
     try {
       studentService.uploadImg(pic, id);
@@ -52,22 +56,18 @@ public class StudentController {
     return ResponseEntity.ok(result);
   }
 
-  @GetMapping("img")
-  public ResponseEntity<Boolean> getImg(@RequestParam Long id, HttpServletResponse response) {
+  @GetMapping("/img/{id}")
+  public ResponseEntity<CommonResponse> getImg(@PathVariable Long id, HttpServletResponse response) {
     StudentEntity student = studentService.getStudent(id);
 
-    // TODO 通过文件名和byte[]生成文件,放到/tmp文件夹里。
+    if (StringUtils.isBlank(student.getPicName()) || student.getPic() == null || student.getPic().length == 0) {
+      return ResponseEntity.ok(CommonResponse.of(ResponseEnum.SUCCESS));
+    }
+    String downloadName = student.getName() + FileUtils.getFileSuffix(student.getPicName());
 
-    String filePath = "/Users/q/Desktop/jmeter/test/";
-    String fileName = "blob.jpeg";
+    FileUtils.download(response, downloadName, student.getPic());
 
-    String downloadName = student.getName() + FileUtils.getFileSuffix(fileName);
-
-    FileUtils.download(response, fileName, filePath, downloadName);
-
-//    FileUtils.delete(fileName, filePath);
-
-    return ResponseEntity.ok(true);
+    return ResponseEntity.ok(CommonResponse.of(ResponseEnum.STUDENT_NO_PIC));
   }
 
   @GetMapping("/page")

@@ -3,6 +3,7 @@ package com.kpztech.practice.util;
 import org.springframework.util.StringUtils;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,7 +26,8 @@ public class FileUtils {
     return null;
   }
 
-  public static void download(HttpServletResponse response, String fileName, String filePath, String downloadName) {
+  private static void download(
+      HttpServletResponse response, String fileName, String filePath, String downloadName, byte[] bytes) {
     response.setContentType("application/octet-stream");
     try {
       response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(downloadName, "UTF-8"));
@@ -38,7 +40,11 @@ public class FileUtils {
     OutputStream outputStream;
     try {
       outputStream = response.getOutputStream();
-      bufferedInputStream = new BufferedInputStream(new FileInputStream(new File(filePath + fileName)));
+      if (bytes != null && bytes.length > 0) {
+        bufferedInputStream = new BufferedInputStream(new ByteArrayInputStream(bytes));
+      } else {
+        bufferedInputStream = new BufferedInputStream(new FileInputStream(new File(filePath + fileName)));
+      }
       int i = bufferedInputStream.read(buff);
       while (i != -1) {
         outputStream.write(buff, 0, buff.length);
@@ -56,17 +62,25 @@ public class FileUtils {
         }
       }
     }
-
-
   }
 
-  public static void delete(String fileName, String filePath){
+  public static void download(
+      HttpServletResponse response, String downloadName, byte[] bytes) {
+    download(response, null, null, downloadName, bytes);
+  }
+
+  public static void download(
+      HttpServletResponse response, String fileName, String filePath, String downloadName) {
+    download(response, fileName, filePath, downloadName, null);
+  }
+
+  public static void delete(String fileName, String filePath) {
     File file = new File(filePath + fileName);
-    if(file.exists()){
+    if (file.exists()) {
       boolean delete = file.delete();
-      if(delete){
+      if (delete) {
         log.info("Delete file[" + fileName + "] success!");
-      }else {
+      } else {
         log.warn("Delete file[" + fileName + "] failed!");
       }
     }

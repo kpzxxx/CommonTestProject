@@ -1,4 +1,7 @@
-package com.kpztech.practice.ddd;
+package com.kpztech.practice.mvc.controller;
+
+import com.kpztech.practice.ddd.CreateCustomerCommand;
+import com.kpztech.practice.ddd.CustomerApplication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
