@@ -30,24 +30,27 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/student")
 public class StudentController {
 
-  @Autowired
-  private StudentService studentService;
+  private final StudentService studentService;
+
+  public StudentController(StudentService studentService) {
+    this.studentService = studentService;
+  }
 
   @GetMapping("/count")
-  public CommonResponse count() {
+  public CommonResponse<Long> count() {
     Long count = studentService.count();
     return CommonResponse.of(count);
   }
 
   @PostMapping("/insert")
-  public ResponseEntity<CommonResponse> insert(@RequestBody StudentEntity student) {
+  public ResponseEntity<CommonResponse<StudentVO>> insert(@RequestBody StudentEntity student) {
     StudentEntity result = studentService.insert(student);
     StudentVO studentVO = StudentConverter.convert(result);
     return ResponseEntity.ok(CommonResponse.of(studentVO));
   }
 
   @PostMapping("/img/{id}")
-  public ResponseEntity<CommonResponse> uploadImg(@RequestParam MultipartFile pic, @PathVariable Long id) {
+  public ResponseEntity<CommonResponse<Object>> uploadImg(@RequestParam MultipartFile pic, @PathVariable Long id) {
     try {
       studentService.uploadImg(pic, id);
     } catch (IOException e) {
@@ -58,7 +61,7 @@ public class StudentController {
   }
 
   @GetMapping("/img/{id}")
-  public ResponseEntity<CommonResponse> getImg(@PathVariable Long id, HttpServletResponse response) {
+  public ResponseEntity<CommonResponse<Object>> getImg(@PathVariable Long id, HttpServletResponse response) {
     StudentEntity student = studentService.getStudent(id);
 
     if (StringUtils.isBlank(student.getPicName()) || student.getPic() == null || student.getPic().length == 0) {
@@ -72,7 +75,7 @@ public class StudentController {
   }
 
   @GetMapping("/page")
-  public ResponseEntity<CommonResponse> getPaged(
+  public ResponseEntity<CommonResponse<List<StudentVO>>> getPaged(
       @RequestParam(defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "20") Integer pageSize) {
     List<StudentEntity> studentEntities = studentService.pageQuery(pageNo, pageSize);
     List<StudentVO> result = studentEntities.stream().map(StudentConverter::convert).collect(Collectors.toList());
@@ -80,7 +83,7 @@ public class StudentController {
   }
 
   @GetMapping("/pageWithTest")
-  public ResponseEntity<CommonResponse> pageQueryWithTest(
+  public ResponseEntity<CommonResponse<List<StudentVO>>> pageQueryWithTest(
       @RequestParam(defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "20") Integer pageSize) {
     List<StudentEntity> studentEntities = studentService.pageQueryWithTest(pageNo, pageSize);
     List<StudentVO> result = studentEntities.stream().map(StudentConverter::convert).collect(Collectors.toList());

@@ -30,7 +30,7 @@ public class CustomerController {
   @PostMapping("/customer")
   public ResponseEntity<Object> create(@RequestParam String firstName, @RequestParam String lastName) {
     application.create(new CreateCustomerCommand(firstName, lastName));
-    return ResponseEntity.ok(null);
+    return ResponseEntity.ok("OK");
   }
 
   @GetMapping("/customer/{id}")
@@ -41,7 +41,7 @@ public class CustomerController {
   @PatchMapping("/customer/{id}")
   public ResponseEntity<Object> changeFirstName(@PathVariable("id") String id, @RequestParam String firstName) {
     application.changeFirstName(id, firstName);
-    return ResponseEntity.ok(null);
+    return ResponseEntity.ok("OK");
   }
 
   @GetMapping("/customers")

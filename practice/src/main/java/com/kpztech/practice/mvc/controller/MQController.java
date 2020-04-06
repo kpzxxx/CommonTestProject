@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/mq")
 public class MQController {
 
-	@Autowired
-	private RocketMQProducer rocketMQProducer;
+	private final RocketMQProducer rocketMQProducer;
+
+	public MQController(RocketMQProducer rocketMQProducer) {
+		this.rocketMQProducer = rocketMQProducer;
+	}
 
 	@RequestMapping("/send")
 	public String send(@RequestParam("msg") String msg) {

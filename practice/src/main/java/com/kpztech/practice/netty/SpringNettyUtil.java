@@ -1,43 +1,41 @@
 package com.kpztech.practice.netty;
 
+import com.kpztech.practice.netty.client.EchoClient;
 import com.kpztech.practice.netty.server.EchoServer;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import io.netty.channel.ChannelFuture;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import io.netty.channel.ChannelFuture;
-
 @Component
 public class SpringNettyUtil implements CommandLineRunner {
 
-  @Value("${netty.url}")
-  private String url;
+	@Value("${netty.url}")
+	private String url;
 
-  @Value("${netty.port}")
-  private int port;
+	@Value("${netty.port}")
+	private int port;
 
-  @Autowired
-  private EchoServer echoServer;
+	private final EchoServer echoServer;
 
-//  @Autowired
-//  private EchoClient echoClient;
+	public SpringNettyUtil(EchoServer echoServer, EchoClient echoClient) {
+		this.echoServer = echoServer;
+		this.echoClient = echoClient;
+	}
 
-  @Override
-  public void run(String... args) {
-    ChannelFuture serverFuture = echoServer.start(url, port);
-//    ChannelFuture clientFuture = echoClient.start(url, port);
+	private final EchoClient echoClient;
 
-    Runtime.getRuntime().addShutdownHook(new Thread(() -> echoServer.destroy()));
-//    Runtime.getRuntime().addShutdownHook(new Thread(() -> echoClient.destroy()));
+	@Override
+	public void run(String... args) {
+		ChannelFuture serverFuture = echoServer.start(url, port);
 
-    serverFuture.channel().closeFuture().syncUninterruptibly();
-//    clientFuture.channel().closeFuture().syncUninterruptibly();
-  }
+		Runtime.getRuntime().addShutdownHook(new Thread(echoServer::destroy));
 
-//  public void send(String msg) {
-//    echoClient.send(msg);
-//  }
+		serverFuture.channel().closeFuture().syncUninterruptibly();
+	}
+
+	public void send(String msg) {
+		echoClient.send(msg);
+	}
 
 }

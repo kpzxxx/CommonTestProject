@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/netty")
 public class NettyController {
 
-  @Autowired
-  private SpringNettyUtil springNettyUtil;
+  private final SpringNettyUtil springNettyUtil;
+
+  public NettyController(SpringNettyUtil springNettyUtil) {
+    this.springNettyUtil = springNettyUtil;
+  }
 
   @RequestMapping("/send")
   public String test(@RequestParam("msg") String msg) {
-//    springNettyUtil.send(msg);
+    springNettyUtil.send(msg);
     return "Success!";
   }
 

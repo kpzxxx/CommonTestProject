@@ -26,7 +26,7 @@ public class CommonResponse<T> {
     return new CommonResponse<>(responseEnum.getCode(), responseEnum.getMessage(), null);
   }
 
-  public static <T> CommonResponse of(T data) {
+  public static <T> CommonResponse<T> of(T data) {
     return new CommonResponse<>(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMessage(), data);
   }
 }

@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Scope("request")
 public class SingController {
 
-  @Autowired
-  private SingService singService;
+  private final SingService singService;
+
+  public SingController(SingService singService) {
+    this.singService = singService;
+  }
 
   @RequestMapping("/sing")
   public String sing(){

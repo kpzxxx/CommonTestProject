@@ -18,11 +18,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RedisController {
 
-  @Autowired
-  private RedisUtil redisUtil;
+  private final RedisUtil redisUtil;
 
-  @Autowired
-  private RedissonUtil redissonUtil;
+  private final RedissonUtil redissonUtil;
+
+  public RedisController(RedisUtil redisUtil, RedissonUtil redissonUtil) {
+    this.redisUtil = redisUtil;
+    this.redissonUtil = redissonUtil;
+  }
 
   @RequestMapping(path = "/set", method = RequestMethod.POST, consumes = "application/json;charset=utf-8")
   public String set(@RequestBody RedisSetRequest request) {

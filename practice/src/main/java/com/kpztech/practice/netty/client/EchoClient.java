@@ -10,14 +10,18 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 public class EchoClient {
 
-  @Autowired
-  private EchoClientHandler echoClientHandler;
+  private final EchoClientHandler echoClientHandler;
 
   private Channel channel;
+
+  public EchoClient(EchoClientHandler echoClientHandler) {
+    this.echoClientHandler = echoClientHandler;
+  }
 
 
   public ChannelFuture start(String url, int port) {
