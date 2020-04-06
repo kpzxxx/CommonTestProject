@@ -14,6 +14,7 @@
     - **Redis** docker run --name redis -p 6379:6379 -d redis
     - **Zookeeper** docker run --name zookeeper -p 2181:2181 --restart always -d zookeeper
     - **RocketMQ Admin** docker run -e "JAVA_OPTS=-Drocketmq.namesrv.addr=192.168.56.1:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false" -p 8080:8080 --name rmq-admin --detach -t styletang/rocketmq-console-ng
+    - **HBase** docker run -d -p 16010:16010 --name hbase harisekhon/hbase
 > 注意：
 >  * broker.conf 文件里需要添加brokerIP1=127.0.0.1
 >  * docker pull慢可以加镜像地址:C:\Users\PrimoKang\.docker 中："registry-mirrors": ["http://hub-mirror.c.163.com/"]
