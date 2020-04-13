@@ -56,4 +56,7 @@
         </where>
     </select>
 
+    <!--<cache/>-->
+    <!--<cache-ref namespace=""/>-->
+
 </mapper>

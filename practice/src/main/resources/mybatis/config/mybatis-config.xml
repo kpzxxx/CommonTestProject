@@ -5,4 +5,9 @@
     <properties>
         <!--<property name="tb_student" value="student"/>-->
     </properties>
+
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
 </configuration>
