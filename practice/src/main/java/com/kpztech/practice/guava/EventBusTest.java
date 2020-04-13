@@ -33,8 +33,14 @@ public class EventBusTest {
 
   @Subscribe
   @AllowConcurrentEvents
-  public void process(EventBusMsg msg) {
-    log.info("Received:{}",JSON.toJSONString(msg));
+  public void process1(EventBusMsg msg) {
+    log.info("[P1] Received:{}",JSON.toJSONString(msg));
+  }
+
+  @Subscribe
+  @AllowConcurrentEvents
+  public void process2(EventBusMsg msg) {
+    log.info("[P2] Received:{}",JSON.toJSONString(msg));
   }
 
   @Data
