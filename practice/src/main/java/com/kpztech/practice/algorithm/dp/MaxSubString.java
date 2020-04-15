@@ -12,15 +12,19 @@ import com.alibaba.fastjson.JSON;
 public class MaxSubString {
 
   public static void main(String[] args) {
-    int k = 2;
-    String s = "1010111";
+    int k = 1;
+    String s = "1010";
     System.out.println(countDP(k, s));
   }
 
   // 动态规划
   private static int countDP(int k, String s) {
+    // s中1的数量
     int num = 0;
+
     int[] dp = new int[k + 2];
+
+    // 符合要求的数量
     int result = 0;
     dp[0] = 1;
     for (char c : s.toCharArray()) {
@@ -28,15 +32,19 @@ public class MaxSubString {
         num++;
       }
 
-      dp[num % (k + 2)]++;
+      int i0 = num % (k + 2);
+      int i1 = (num + 1) % (k + 2);
+      int i2 = (num - k) % (k + 2);
 
-      dp[(num + 1) % (k + 2)] = 0;
+      dp[i0]++;
+
+      dp[i1] = 0;
 
       System.out.print(JSON.toJSONString(dp));
       if (num - k >= 0) {
-        result += dp[(num - k) % (k + 2)];
-        System.out.println(" Plus:" + dp[(num - k) % (k + 2)]);
-      }else {
+        result += dp[i2];
+        System.out.println(" Plus:" + dp[i2]);
+      } else {
         System.out.println();
       }
     }
@@ -54,6 +62,7 @@ public class MaxSubString {
           continue;
         }
         char[] chars = sub.toCharArray();
+
         int count = 0;
         for (int m = 0; m < sub.length(); m++) {
           if (chars[m] == '1') {

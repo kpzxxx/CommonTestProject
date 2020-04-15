@@ -38,7 +38,7 @@
     <select id="pageWithGenders" resultType="com.kpztech.practice.mvc.entity.StudentEntity">
         select *
         from student
-        <if test="genders!=null and genders.size()>0">
+        <if test="genders!=null and genders.length>0">
             where gender in
             <foreach collection="genders" item="gender" open="(" close=")" separator=",">
                 #{gender}

@@ -1,6 +1,5 @@
 package com.kpztech.practice.mvc.service;
 
-import com.google.common.collect.Lists;
 import com.kpztech.practice.mvc.entity.StudentEntity;
 import com.kpztech.practice.mvc.mapper.StudentMapper;
 
@@ -36,10 +35,10 @@ public class StudentService {
     return studentMapper.page(offset, limit);
   }
 
-  public List<StudentEntity> pageQueryWithTest(Integer pageNo, Integer pageSize) {
+  public List<StudentEntity> pageQueryWithTest(Integer pageNo, Integer pageSize, Integer... genders) {
     int offset = (pageNo - 1) * pageSize;
     int limit = pageSize;
-    return studentMapper.pageWithGenders(offset, limit, Lists.newArrayList(1, 2));
+    return studentMapper.pageWithGenders(offset, limit, genders);
   }
 
   public StudentEntity getStudent(Long id) {

@@ -9,7 +9,6 @@ import com.kpztech.practice.mvc.vo.StudentVO;
 import com.kpztech.practice.util.FileUtils;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -85,7 +84,7 @@ public class StudentController {
   @GetMapping("/pageWithTest")
   public ResponseEntity<CommonResponse<List<StudentVO>>> pageQueryWithTest(
       @RequestParam(defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "20") Integer pageSize) {
-    List<StudentEntity> studentEntities = studentService.pageQueryWithTest(pageNo, pageSize);
+    List<StudentEntity> studentEntities = studentService.pageQueryWithTest(pageNo, pageSize, 1, 2);
     List<StudentVO> result = studentEntities.stream().map(StudentConverter::convert).collect(Collectors.toList());
     return ResponseEntity.ok(CommonResponse.of(result));
   }

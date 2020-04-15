@@ -19,7 +19,7 @@ public interface StudentMapper {
   List<StudentEntity> page(@Param("offset") Integer offset, @Param("limit") Integer limit);
 
   List<StudentEntity> pageWithGenders(
-      @Param("offset") Integer offset, @Param("limit") Integer limit, @Param("genders") List<Integer> genders);
+      @Param("offset") Integer offset, @Param("limit") Integer limit, @Param("genders") Integer[] genders);
 
   StudentEntity getById(@Param("id") Long id);
 
