@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class KTechDateUtils {
   public static String now(){
-    return DateFormatUtils.format(new Date(), DateFormatUtils.ISO_8601_EXTENDED_DATETIME_FORMAT.getPattern());
+    return DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss");
   }
 
 }

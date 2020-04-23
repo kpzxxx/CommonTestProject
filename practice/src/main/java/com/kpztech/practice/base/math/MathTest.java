@@ -1,20 +1,26 @@
 package com.kpztech.practice.base.math;
 
+import java.math.BigDecimal;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class MathTest {
 
   public static void main(String[] args) {
-    System.out.println(Math.log(65536)/ Math.log(2));
-    System.out.println(Math.log(16777216)/ Math.log(2));
+    int allNum = 738;
+    int sameNum = 522;
+    int allDiffNum = 5938;
 
-//    byte b1 = 0b11111111111111111111111111111111;
-//    byte b2 = 0b1111111;
-//    byte b3 = 0b11111111111111111111111110000000;
-//
-//    System.out.println(Byte.toUnsignedInt(b1));
-//    System.out.println(Byte.toUnsignedInt(b2));
-//    System.out.println(Byte.toUnsignedInt(b3));
-//    System.out.println(Short.toBinaryString(127));
-//    System.out.println(Short.toBinaryString(128));
+    long diffNum = allNum - sameNum;
+    float diffRate =
+        new BigDecimal(diffNum).divide(new BigDecimal(allNum), 4, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)).floatValue();
+    log.info("Diff Rate: {}%", diffRate);
+
+    float averageDiffNum = new BigDecimal(allDiffNum).divide(new BigDecimal(diffNum), 2, BigDecimal.ROUND_HALF_UP)
+                                                     .setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+    log.info("Average diff num: {}", averageDiffNum);
+
 
   }
 
