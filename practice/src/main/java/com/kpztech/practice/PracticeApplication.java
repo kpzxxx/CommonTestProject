@@ -4,10 +4,12 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication
 @ServletComponentScan("com.kpztech.practice.mvc")
 @MapperScan("com.kpztech.practice.mvc.mapper")
+@EnableAspectJAutoProxy(proxyTargetClass=true)
 public class PracticeApplication {
 
   public static void main(String[] args) {

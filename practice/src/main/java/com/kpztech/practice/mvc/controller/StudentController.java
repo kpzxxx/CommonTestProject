@@ -1,5 +1,6 @@
 package com.kpztech.practice.mvc.controller;
 
+import com.kpztech.practice.base.spring.aop.ShowTime;
 import com.kpztech.practice.mvc.common.CommonResponse;
 import com.kpztech.practice.mvc.common.ResponseEnum;
 import com.kpztech.practice.mvc.converter.StudentConverter;
@@ -74,6 +75,7 @@ public class StudentController {
   }
 
   @GetMapping("/page")
+  @ShowTime
   public ResponseEntity<CommonResponse<List<StudentVO>>> getPaged(
       @RequestParam(defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "20") Integer pageSize) {
     List<StudentEntity> studentEntities = studentService.pageQuery(pageNo, pageSize);

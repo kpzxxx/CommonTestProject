@@ -1,6 +1,7 @@
 package com.kpztech.practice.mvc.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.kpztech.practice.base.spring.aop.ShowTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +23,7 @@ public class CommonResponse<T> {
     this.message = e.getMessage();
   }
 
-  public static <T> CommonResponse<T> of(ResponseEnum responseEnum) {
+  public static <@ShowTime T> CommonResponse<T> of(ResponseEnum responseEnum) {
     return new CommonResponse<>(responseEnum.getCode(), responseEnum.getMessage(), null);
   }
 
