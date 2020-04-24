@@ -1,12 +1,11 @@
 package com.kpztech.practice.base.spring.aop;
 
-import com.kpztech.practice.util.KTechDateUtils;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StopWatch;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,12 +27,15 @@ public class TestAspect {
 
   @Around("showTime()")
   public Object showTimeAround(ProceedingJoinPoint pjp) throws Throwable {
-    long startTime = System.currentTimeMillis();
-    log.info("Method[{}] start time: {}", pjp.getSignature().getName(), KTechDateUtils.now());
+
+    String
+        taskName =
+        "Method[" + pjp.getTarget().getClass().getSimpleName() + "." + pjp.getSignature().getName() + "()]";
+    StopWatch stopWatch = new StopWatch(taskName);
+    stopWatch.start();
     Object result = pjp.proceed();
-    long endTime = System.currentTimeMillis();
-    log.info("Method[{}.{}()] cost time: {} ms", pjp.getSignature().getClass().getName(), pjp.getSignature().getName(),
-             (endTime - startTime));
+    stopWatch.stop();
+    log.info(stopWatch.shortSummary());
     return result;
   }
 
