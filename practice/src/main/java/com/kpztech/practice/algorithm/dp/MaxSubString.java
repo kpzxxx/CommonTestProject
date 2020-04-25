@@ -13,7 +13,7 @@ public class MaxSubString {
 
   public static void main(String[] args) {
     int k = 1;
-    String s = "1010";
+    String s = "100010001";
     System.out.println(countDP(k, s));
   }
 
@@ -22,6 +22,7 @@ public class MaxSubString {
     // s中1的数量
     int num = 0;
 
+    // 动态规划思路，当前状态依赖前k个状态并且需维护当前状态为后面服务，需要k+1空间，但是需要开辟k+2个空间，其中一个空间来消除掉之前状态的值。
     int[] dp = new int[k + 2];
 
     // 符合要求的数量
@@ -43,7 +44,7 @@ public class MaxSubString {
       System.out.print(JSON.toJSONString(dp));
       if (num - k >= 0) {
         result += dp[i2];
-        System.out.println(" Plus:" + dp[i2]);
+        System.out.println(" Plus:" + dp[i2] + ", Now:" + result);
       } else {
         System.out.println();
       }
