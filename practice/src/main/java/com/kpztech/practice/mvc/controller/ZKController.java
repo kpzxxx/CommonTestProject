@@ -60,7 +60,7 @@ public class ZKController {
     List<ACL> acls = ZooDefs.Ids.OPEN_ACL_UNSAFE;
     String result = "Success.";
     try {
-      result = zooKeeper.create("/myPath", nodeData.getBytes(), acls, CreateMode.PERSISTENT);
+      result = zooKeeper.create(ZK_FILE_PATH, nodeData.getBytes(), acls, CreateMode.PERSISTENT);
     } catch (KeeperException | InterruptedException e) {
       log.error("[ZK]Create node failed.", e);
       return ResponseEntity.ok(CommonResponse.of(result));
