@@ -1,5 +1,6 @@
 package com.kpztech.practice.mvc.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.kpztech.practice.base.spring.aop.ShowTime;
 import com.kpztech.practice.mvc.common.CommonResponse;
 import com.kpztech.practice.mvc.common.ResponseEnum;
@@ -40,6 +41,13 @@ public class StudentController {
   public CommonResponse<Long> count() {
     Long count = studentService.count();
     return CommonResponse.of(count);
+  }
+
+  @GetMapping("/get")
+  public CommonResponse<StudentEntity> get(@RequestParam Long id) {
+    StudentEntity student = studentService.getStudent(id);
+    System.out.println(JSON.toJSONString(student));
+    return CommonResponse.of(student);
   }
 
   @PostMapping("/insert")
