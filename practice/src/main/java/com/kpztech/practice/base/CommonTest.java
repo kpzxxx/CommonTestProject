@@ -1,6 +1,8 @@
 package com.kpztech.practice.base;
 
 import java.math.BigDecimal;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class CommonTest {
 
@@ -11,6 +13,8 @@ public class CommonTest {
     long n2 = calculateTotalPrice(5400L,34800000L);
     long sum =  n1 + n2;
     System.out.println(sum);
+
+    ExecutorService executor = Executors.newFixedThreadPool(3);
   }
 
   public static Long calculateTotalPrice(Long num, Long price) {
