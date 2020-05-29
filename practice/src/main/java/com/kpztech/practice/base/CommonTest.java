@@ -15,6 +15,10 @@ public class CommonTest {
     System.out.println(sum);
 
     ExecutorService executor = Executors.newFixedThreadPool(3);
+
+    System.currentTimeMillis();
+
+
   }
 
   public static Long calculateTotalPrice(Long num, Long price) {
