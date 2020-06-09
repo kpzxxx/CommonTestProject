@@ -12,6 +12,8 @@ public class DateTest {
 //    System.out.println(KTechDateUtils.getDaysBefore(2).before(KTechDateUtils.getDaysBefore(1)));
     System.out.println(KTechDateUtils.format(KTechDateUtils.getDaysBefore(-1, 13)));
 
+    System.out.println(null == new Integer(3));
+
 
   }
 
