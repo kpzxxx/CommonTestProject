@@ -31,10 +31,11 @@ public class NioClient {
     FileChannel fc = new RandomAccessFile(fileName, "r").getChannel();
     long count = fc.size();
 
+    // 这里ByteBuffer只维护了文件的大小 putLong(size)
     ByteBuffer buffer = ByteBuffer.allocate(8);
     buffer.putLong(count);
-
     buffer.flip();
+    // 写入SocketChannel
     sc.write(buffer);
     buffer.clear();
 

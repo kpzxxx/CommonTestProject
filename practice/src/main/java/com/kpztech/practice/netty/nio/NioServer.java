@@ -10,7 +10,6 @@ import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class NioServer {
 
@@ -21,7 +20,6 @@ public class NioServer {
     try {
       ssc = ServerSocketChannel.open();
       selector = Selector.open();
-      AtomicInteger counter = new AtomicInteger(0);
 
       ssc.configureBlocking(false);
       ssc.bind(new InetSocketAddress(8098));
@@ -32,7 +30,6 @@ public class NioServer {
 
         if (flag > 0) {
           Iterator<SelectionKey> keys = selector.selectedKeys().iterator();
-          counter.getAndIncrement();
           while (keys.hasNext()) {
             SelectionKey key = keys.next();
             keys.remove();
@@ -46,7 +43,6 @@ public class NioServer {
               SocketChannel channel = (SocketChannel) key.channel();
               acceptFile("/Users/q/Desktop/docs1/1.txt", channel);
               channel.close();
-              System.out.println(counter.get());
             }
           }
         }
@@ -63,12 +59,12 @@ public class NioServer {
   }
 
   private void acceptFile(String fileName, SocketChannel sc) throws IOException {
+    // 这里从ByteBuffer里读了文件大小 getLong(0)
     ByteBuffer buffer = ByteBuffer.allocate(8);
-
+    // 从SocketChannel读出
     sc.read(buffer);
     buffer.flip();
     long fileSize = buffer.getLong(0);
-
     buffer.clear();
 
     FileChannel fc = new RandomAccessFile(fileName, "rw").getChannel();
