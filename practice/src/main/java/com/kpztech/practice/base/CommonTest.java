@@ -16,11 +16,10 @@ public class CommonTest {
 //
 //    System.currentTimeMillis();
 
-    System.out.println(Integer.toBinaryString(7307));
-    System.out.println(Integer.toBinaryString(-117));
-    System.out.println(0b00011100);
+//    System.out.println(Integer.toBinaryString(7307));
+//    System.out.println(Integer.toBinaryString(-117));
+//    System.out.println(0b00011100);
     System.out.println(0b11111111111111111111111110001011);
-
 
   }
 
