@@ -1,7 +1,6 @@
 package com.kpztech.practice.base;
 
 import java.math.BigDecimal;
-import java.util.Random;
 
 public class CommonTest {
 
@@ -22,17 +21,10 @@ public class CommonTest {
 //    System.out.println(0b00011100);
 //    System.out.println(0b11111111111111111111111110001011);
 
-    Random random1 = new Random();
-    random1.setSeed(0);
-    Random random2 = new Random();
-    random2.setSeed(0);
-    for(int i=0;i<100;i++){
-      int i1 = random1.nextInt(868183);
-      System.out.print(i1 + " - ");
+    System.out.println(0x5DEECE66DL);
 //      int i2 = random2.nextInt(868183);
 //      System.out.println(i2);
 
-    }
 
   }
 
