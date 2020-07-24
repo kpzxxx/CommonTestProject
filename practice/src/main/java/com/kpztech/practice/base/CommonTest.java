@@ -21,9 +21,13 @@ public class CommonTest {
 //    System.out.println(0b00011100);
 //    System.out.println(0b11111111111111111111111110001011);
 
-    System.out.println(0x5DEECE66DL);
+//    System.out.println(0x5DEECE66DL);
 //      int i2 = random2.nextInt(868183);
 //      System.out.println(i2);
+
+    System.out.println(399/200);
+    System.out.println(400/200);
+    System.out.println(401/200);
 
 
   }

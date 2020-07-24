@@ -4,6 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import org.junit.Test;
+
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -18,7 +21,7 @@ public class RandomTest {
 //    testSeed();
 
     // LCG
-    testLCG();
+//    testLCG();
 
     // Knuth洗牌算法
 //      knuthShuffle();
@@ -27,7 +30,8 @@ public class RandomTest {
 //    lottery();
   }
 
-  private static void testSeed() {
+  @Test
+  public void testRandomSeed() {
     int bound = 1000;
     Random random1 = new Random(0);
     Random random2 = new Random(0);
@@ -36,11 +40,22 @@ public class RandomTest {
     }
   }
 
-  private static void testLCG() {
+  @Test
+  public void testSecureRandomSeed() {
+    int bound = 1000;
+    SecureRandom random1 = new SecureRandom("0".getBytes());
+    SecureRandom random2 = new SecureRandom("0".getBytes());
+    for (int i = 0; i < 100; i++) {
+      System.out.println(random1.nextInt(bound) + "-" + random2.nextInt(bound));
+    }
+  }
+
+  @Test
+  public void testLCG() {
     int m = 9;
-    int a = 2, c = 0, seed = 1;
+//    int a = 2, c = 0, seed = 1;
 //    int a = 2, c = 0, seed = 3;
-//    int a = 4, c = 1, seed = 0;
+    int a = 4, c = 1, seed = 0;
     List<Integer> resultList = Lists.newArrayList();
     int result;
     resultList.add(seed);
@@ -58,7 +73,8 @@ public class RandomTest {
     System.out.println(JSON.toJSONString(resultList));
   }
 
-  private static void knuthShuffle() {
+  @Test
+  public void knuthShuffle() {
     List<Integer> list = Lists.newArrayList();
     Random random = new Random();
     for (int i = 1; i <= 10; i++) {
@@ -82,7 +98,8 @@ public class RandomTest {
   /**
    * 杭州市2020年6月份小客车增量指标摇号结束。本月以摇号方式向单位和个人配置增量指标5333个，其中个人指标4693个，单位指标640个。参与本期摇号的个人有效编码数868183个，单位有效编码数21729个。
    */
-  private static void lottery() {
+  @Test
+  public void lottery() {
     int bound = 868183;
 //    long seed = 987436;
     Random userNo = new Random();
