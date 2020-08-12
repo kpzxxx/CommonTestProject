@@ -1,7 +1,5 @@
 package com.kpztech.practice.algorithm.huawei;
 
-import org.junit.Test;
-
 import java.util.Scanner;
 
 /**
@@ -10,6 +8,7 @@ import java.util.Scanner;
 public class HJ12 {
 
 	public static void main(String[] args) {
+
 		answer1();
 	}
 
