@@ -31,9 +31,8 @@ public class CommonTest {
 //      int i2 = random2.nextInt(868183);
 //      System.out.println(i2);
 
-    System.out.println(399/200);
-    System.out.println(400/200);
-    System.out.println(401/200);
+    System.out.println(Long.MAX_VALUE);
+    System.out.println(Integer.MAX_VALUE);
 
 
   }
