@@ -6,7 +6,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Main1 {
+/**
+ * 任务调度：
+ * 输入：第一行 1 3 2 2 3 3
+ * 第二行 3 2
+ * 第一行：任务从时间m开始 执行需要花费的时间n ...
+ * 第二行：队列长度 worker池大小
+ * 如果m时间有线程开始执行，但是队列满了，看此时有没有执行完的线程，
+ * 如果有，开始执行队列最前端线程，新线程进入队列；
+ * 如果没有，丢弃线程
+ * 输出：执行完成的时间点 丢弃的线程数。
+ */
+public class Test1 {
 
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
