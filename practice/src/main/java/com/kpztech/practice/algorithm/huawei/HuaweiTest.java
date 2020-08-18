@@ -3,11 +3,12 @@ package com.kpztech.practice.algorithm.huawei;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.Scanner;
+import java.util.TreeSet;
 
 public class HuaweiTest {
 	public static void main(String[] args) {
-		hj29();
+		hj14();
 	}
 
 	/**
@@ -20,6 +21,37 @@ public class HuaweiTest {
 			System.out.println(strings[strings.length - 1].length());
 		}
 	}
+
+	/**
+	 * 给定n个字符串，请对n个字符串按照字典序排列。
+	 * IN:输入第一行为一个正整数n(1≤n≤1000),下面n行为n个字符串(字符串长度≤100),字符串中只含有大小写字母。
+	 * OUT:数据输出n行，输出结果为按照字典序排列的字符串。
+	 */
+	public static void hj14() {
+		Scanner scanner = new Scanner(System.in);
+
+		int i = 0;
+		int lines = 0;
+		TreeSet<String> treeSet = new TreeSet<>();
+		while (scanner.hasNext()) {
+			if (i == 0) {
+				lines = scanner.nextInt();
+				i++;
+			} else {
+				String string = scanner.nextLine();
+				if (string != null && !string.equals("")) {
+					treeSet.add(string);
+					i++;
+				}
+			}
+
+			if (i == lines + 1) {
+				break;
+			}
+		}
+		treeSet.forEach(System.out::println);
+	}
+
 
 	/**
 	 * •计算一个数字的立方根，不使用库函数
@@ -104,9 +136,9 @@ public class HuaweiTest {
 					cs[i] = (char) (c - 33);
 				}
 			} else if (c == 'z') {
-				if(encode){
+				if (encode) {
 					cs[i] = 'A';
-				}else {
+				} else {
 					cs[i] = 'Y';
 				}
 			} else if (c > 'A' && c < 'Z') {
@@ -116,21 +148,21 @@ public class HuaweiTest {
 					cs[i] = (char) (c + 31);
 				}
 			} else if (c == 'Z') {
-				if(encode) {
+				if (encode) {
 					cs[i] = 'a';
-				}else {
+				} else {
 					cs[i] = 'y';
 				}
 			} else if (c == 'a') {
-				if(encode) {
+				if (encode) {
 					cs[i] = 'B';
-				}else {
+				} else {
 					cs[i] = 'Z';
 				}
 			} else if (c == 'A') {
-				if(encode) {
+				if (encode) {
 					cs[i] = 'b';
-				}else {
+				} else {
 					cs[i] = 'z';
 				}
 			} else if (c > '0' && c < '9') {
@@ -140,15 +172,15 @@ public class HuaweiTest {
 					cs[i] = (char) (c - 1);
 				}
 			} else if (c == '9') {
-				if(encode) {
+				if (encode) {
 					cs[i] = '0';
-				}else {
+				} else {
 					cs[i] = '8';
 				}
 			} else if (c == '0') {
-				if(encode) {
+				if (encode) {
 					cs[i] = '1';
-				}else {
+				} else {
 					cs[i] = '9';
 				}
 			}
