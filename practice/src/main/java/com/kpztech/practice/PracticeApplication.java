@@ -9,8 +9,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.FilterType;
 
 @SpringBootApplication
-@ServletComponentScan("com.kpztech.practice.mvc")
-@MapperScan("com.kpztech.practice.mvc.mapper")
+@ServletComponentScan("com.kpztech.practice.boot.mvc")
+@MapperScan("com.kpztech.practice.boot.mvc.mapper")
 @ComponentScan(excludeFilters = @ComponentScan.Filter(type = FilterType.ASPECTJ, pattern = "com.kpztech.practice.starter.*"))
 @EnableAspectJAutoProxy(proxyTargetClass=true)
 public class PracticeApplication {
