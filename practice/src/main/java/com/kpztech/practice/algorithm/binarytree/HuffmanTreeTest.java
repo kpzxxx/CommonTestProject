@@ -3,17 +3,22 @@ package com.kpztech.practice.algorithm.binarytree;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 
 public class HuffmanTreeTest {
 
   public static void main(String[] args) {
-    int[] weights = {2,3,7,9,18,25};
+    int[] weights = {2, 3, 7, 9, 18, 25};
+    char[] chars = {'A', 'B', 'C', 'D', 'E', 'F'};
     HuffmanTree huffmanTree = new HuffmanTree();
     huffmanTree.createHuffman(weights);
-    huffmanTree.print(huffmanTree.root);
+    huffmanTree.encode(huffmanTree.root, "");
+//    huffmanTree.print(huffmanTree.root);
+
+    for (int i = 0; i < chars.length; i++) {
+      System.out.println(chars[i] + ":" + huffmanTree.convertHuffmanCode(i));
+    }
   }
 
 
@@ -31,44 +36,62 @@ public class HuffmanTreeTest {
         nodeQueue.add(nodes[i]);
       }
 
-      while (nodeQueue.size() > 1){
+      while (nodeQueue.size() > 1) {
         Node left = nodeQueue.poll();
         Node right = nodeQueue.poll();
 
-        Node parent = new Node(left.getValue() + right.getValue(), left, right);
+        Node parent = new Node(left.getWeight() + right.getWeight(), left, right);
         nodeQueue.add(parent);
       }
       root = nodeQueue.poll();
 
     }
 
-    void print(Node head){
-      if(head == null){
+    public String convertHuffmanCode(int index) {
+      return nodes[index].code;
+    }
+
+    public void encode(Node node, String code) {
+      if (node == null) {
         return;
       }
-      System.out.println(head.getValue());
+      node.code = code;
+      encode(node.left, node.code + "0");
+      encode(node.right, node.code + "1");
+    }
+
+    void print(Node head) {
+      if (head == null) {
+        return;
+      }
+      System.out.println(head.getWeight());
       print(head.getLeft());
       print(head.getRight());
     }
   }
 
 
-
   @Data
-  @AllArgsConstructor
-  public static class Node implements Comparable<Node>{
+  public static class Node implements Comparable<Node> {
 
-    private int value;
+    private String code;
+    private int weight;
     private Node left;
     private Node right;
 
-    Node(int value) {
-      this.value = value;
+    Node(int weight) {
+      this.weight = weight;
+    }
+
+    Node(int weight, Node left, Node right) {
+      this.weight = weight;
+      this.left = left;
+      this.right = right;
     }
 
     @Override
     public int compareTo(Node o) {
-      return Integer.compare(this.getValue(), o.getValue());
+      return Integer.compare(this.getWeight(), o.getWeight());
     }
   }
 
