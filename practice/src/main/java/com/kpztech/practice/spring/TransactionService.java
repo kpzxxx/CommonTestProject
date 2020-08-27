@@ -4,7 +4,6 @@ import com.kpztech.practice.boot.mvc.common.StudentGenderEnum;
 import com.kpztech.practice.boot.mvc.entity.StudentEntity;
 import com.kpztech.practice.boot.mvc.service.StudentService;
 
-import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -18,6 +17,9 @@ public class TransactionService {
   @Autowired
   private StudentService studentService;
 
+  @Autowired
+  private TransactionService self;
+
   /**
    * 自己调自己的方法，必须走代理，不然事务不生效。
    *  ((TransactionService) AopContext.currentProxy()).test2(); 要和
@@ -25,7 +27,8 @@ public class TransactionService {
    */
   @Transactional
   public void test1() {
-    ((TransactionService) AopContext.currentProxy()).test2();
+//    ((TransactionService) AopContext.currentProxy()).test2();
+    self.test2();
     test3();
   }
 
