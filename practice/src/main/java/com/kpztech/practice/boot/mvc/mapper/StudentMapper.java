@@ -23,4 +23,6 @@ public interface StudentMapper {
 
   StudentEntity getById(@Param("id") Long id);
 
+  void deleteByPhone(@Param("phone") String phone);
+
 }

@@ -45,4 +45,8 @@ public class StudentService {
     return studentMapper.getById(id);
   }
 
+  public void delete(String phone){
+    studentMapper.deleteByPhone(phone);
+  }
+
 }
