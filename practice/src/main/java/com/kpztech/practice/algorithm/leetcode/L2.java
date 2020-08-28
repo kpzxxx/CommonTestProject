@@ -60,15 +60,6 @@ public class L2 {
 
   }
 
-  public class ListNode {
-
-    int val;
-    ListNode next;
-
-    ListNode(int x) {
-      val = x;
-    }
-  }
 
   @Test
   public void test() {
