@@ -25,6 +25,10 @@ public class PriorityQueue {
 		}
 	}
 
+	public static void heapSort(int[] array){
+		
+	}
+
 	public PriorityQueue enQueue(int key) {
 		if (size >= array.length) {
 			resize();
