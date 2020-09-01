@@ -34,6 +34,8 @@ public class CommonTest {
     System.out.println(Long.MAX_VALUE);
     System.out.println(Integer.MAX_VALUE);
 
+    System.out.println(1<<8);
+
 
   }
 
@@ -57,6 +59,10 @@ public class CommonTest {
   }
 
 
-
+  @Test
+  public void test1(){
+    System.out.println(1<<8);
+    System.out.println(Integer.toBinaryString(1 << 8));
+  }
 
 }
