@@ -35,10 +35,11 @@ public class L146 {
   }
 
 
-  public class LRUCache {
+  public static class LRUCache {
 
     private int size;
     private int capacity;
+    // 用头尾的虚节点保证一致性
     private DLinkedNode head, tail;
     private Map<Integer, DLinkedNode> cache = new HashMap<>();
 
@@ -51,6 +52,7 @@ public class L146 {
       tail.prev = head;
     }
 
+    // HashMap使get操作有O(1)的复杂度
     public int get(int key) {
       DLinkedNode node = cache.get(key);
       if (node == null) {
@@ -69,6 +71,7 @@ public class L146 {
         cache.put(key, newNode);
         addToHead(newNode);
         ++size;
+        // 超过size，淘汰tail
         if (size > capacity) {
           DLinkedNode tail = removeTail();
           cache.remove(tail.key);
@@ -105,7 +108,7 @@ public class L146 {
       return res;
     }
 
-    class DLinkedNode {
+    static class DLinkedNode {
 
       int key;
       int value;
