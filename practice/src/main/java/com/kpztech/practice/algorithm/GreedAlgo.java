@@ -14,6 +14,11 @@ public class GreedAlgo {
     }
 
     char[] chars = num.toCharArray();
+
+    
+
+
+
     return null;
 
 
