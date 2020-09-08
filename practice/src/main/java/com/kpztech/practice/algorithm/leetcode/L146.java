@@ -39,6 +39,7 @@ public class L146 {
 
     private int size;
     private int capacity;
+    
     // 用头尾的虚节点保证一致性
     private DLinkedNode head, tail;
     private Map<Integer, DLinkedNode> cache = new HashMap<>();
