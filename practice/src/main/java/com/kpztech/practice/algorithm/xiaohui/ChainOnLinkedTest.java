@@ -1,4 +1,4 @@
-package com.kpztech.practice.algorithm;
+package com.kpztech.practice.algorithm.xiaohui;
 
 /**
  * 判断链表有环

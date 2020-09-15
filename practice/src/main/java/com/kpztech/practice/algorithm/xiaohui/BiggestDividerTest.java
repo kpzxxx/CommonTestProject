@@ -1,4 +1,4 @@
-package com.kpztech.practice.algorithm;
+package com.kpztech.practice.algorithm.xiaohui;
 
 /**
  * 求 a,b的最大公约数

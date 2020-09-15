@@ -1,4 +1,4 @@
-package com.kpztech.practice.algorithm;
+package com.kpztech.practice.algorithm.xiaohui;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
